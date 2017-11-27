@@ -21,7 +21,7 @@ border-bottom:60px solid #0ff;
 .openDialog{
 position:absolute;
 z-index:2;
-background-color:rgba(2,255,255,0.5);
+background-color:rgba(2,255,255,1);
 left:0px;
 top:0px;
 width:100%;
@@ -31,6 +31,7 @@ border-radius:0px;
 box-shadow:0px 0px 100px #f0f;
 border-right:1px solid #0ff;
 border-bottom:1px solid #0ff;
+
 }
 .icon{
 box-shadow:0px 0px 4px #f0f;
@@ -47,25 +48,44 @@ opacity:1;
 }
 .ic-menu{
 position:absolute;
-z-index:100;
+z-index:3;
 left:10px;
 top:10px;
+}
+li{
+ font-size:40px;
+list-style-type:none;
+text-align:center;
+margin-bottom:10px;
+}
+
+ul{
+margin-top:20%;
+margin-right:10%;
 }
 </style>
  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-
+<h1 style="text-align:center">WebSite</h1>
 <div  id="dialog"  class="dialog">
 		<div class="ic-menu" id="openDialog" >
-			<img id="icDialog"  src="img/ic_menu.png"    width=30 height=30></img </div>
+			<img id="icDialog"  src="img/ic_menu.png"    width=30 height=30></img>
+			</div>
+			
+			<ul id="items">
+				<li>home</li>
+				<li>shop</li>
+				<li>about</li>
+			</ul>
 </div>
+
+
 <script src="js/jquery-3.2.1.min.js">
 </script>
 
 <script>
-$("#closeDialog").hide();
-$("#Dialog").hide();
+$("#items").hide();
 var isShow=false;
 $(document).ready(()=>{
 	var isShow=false;
@@ -74,13 +94,13 @@ $(document).ready(()=>{
 			if(!isShow){
 					$("#icDialog").attr("src","img/ic_close.png" );
 					isShow=true;
+					$("#items").delay(500).queue(function (next) { $(this).show(); next(); });
 				}else{
 					$("#icDialog").attr("src","img/ic_menu.png" );
 					isShow=false;
+					$("#items").delay(350).queue(function (next) { $(this).hide(); next(); });
 				}	
 		$("#dialog").toggleClass("openDialog");
-		$("#closeDialog").show();
-		
 	});
 
 });
